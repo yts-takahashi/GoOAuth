@@ -13,3 +13,12 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# Go
+go.sum
+
+# VSCode
+.vscode
+
+# config file
+config.json
