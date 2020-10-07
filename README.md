@@ -1,1 +1,3 @@
 # GoOAuth
+
+GoでOAuthを行うサンプルプログラム
