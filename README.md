@@ -15,7 +15,7 @@ GoでOAuthを行うサンプルプログラム
     "google":{
         "client_id" : "YOUR_CLIENT_ID",
         "secret" : "YOUR_SECRET"
-    }
+    },
     "amazon":{
         "client_id" : "YOUR_CLIENT_ID",
         "secret" : "YOUR_SECRET"
