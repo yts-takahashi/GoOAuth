@@ -16,6 +16,7 @@ import (
   "github.com/markbates/goth/gothic"
   "github.com/markbates/goth/providers/google"
   "github.com/markbates/goth/providers/amazon"
+  "github.com/markbates/goth/providers/facebook"
 )
 
 var port = ":3000"
@@ -24,6 +25,7 @@ var hostName = "http://localhost" + port
 type Config struct{
   Google Provider `json:"google"`
   Amazon Provider `json:"amazon"`
+  Facebook Provider `json:"facebook"`
 }
 
 type Provider struct{
@@ -61,7 +63,10 @@ func authHandler(res http.ResponseWriter, req *http.Request) {
       goth.UseProviders(
         amazon.New(config.Amazon.ClientID, config.Amazon.Secret, hostName+ "/auth/amazon/callback", "profile", "profile:user_id"),
       ) 
-
+    case "facebook":
+      goth.UseProviders(
+        facebook.New(config.Facebook.ClientID, config.Facebook.Secret, hostName+ "/auth/facebook/callback", "email"),
+      )
   }
   gothic.BeginAuthHandler(res, req)
 }
@@ -81,6 +86,7 @@ func main() {
   p.Get("/auth/{provider}/callback", callBackHandler)
   p.Get("/auth/{provider}", authHandler)
   p.Get("/", indexHandlerfunc)
+  p.Get("/mypage", callBackHandler)
 
   log.Println("listening on " + hostName)
   log.Fatal(http.ListenAndServe(port, p))
